@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Dark Mode Toggle 
     const darkModeToggle = document.getElementById("darkModeToggle");
     if (darkModeToggle) {
@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.body.classList.add("dark");
             darkModeToggle.textContent = "Light Mode";
         }
-        darkModeToggle.addEventListener("click", function() {
+        darkModeToggle.addEventListener("click", function () {
             document.body.classList.toggle("dark");
             if (document.body.classList.contains("dark")) {
                 localStorage.setItem("darkMode", "enabled");
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.getElementById("navLinks");
 
     if (hamburger && navLinks) {
-        hamburger.addEventListener("click", function() {
+        hamburger.addEventListener("click", function () {
             navLinks.classList.toggle("active");
         });
     }
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Form Submission for "Start Interview" on index.html 
     const scheduleForm = document.getElementById("scheduleForm");
     if (scheduleForm) {
-        scheduleForm.addEventListener("submit", function(event) {
+        scheduleForm.addEventListener("submit", function (event) {
             event.preventDefault();
             const profile = document.getElementById("profile").value;
             const experience = document.getElementById("experience").value;
@@ -48,12 +48,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const setupVideoPreview = document.getElementById("videoPreview");
     if (setupVideoPreview && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-            .then(function(stream) {
+            .then(function (stream) {
                 setupVideoPreview.srcObject = stream;
                 mediaStream = stream;
                 setupVideoPreview.muted = true; // Ensure no feedback on setup page 
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 console.error("Error accessing media devices:", err);
                 alert("Could not access camera/microphone. Please ensure permissions are granted.");
             });
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const micTestButton = document.getElementById("micTestButton");
     const micLevel = document.getElementById("micLevel");
     if (micTestButton && micLevel) {
-        micTestButton.addEventListener("click", function() {
+        micTestButton.addEventListener("click", function () {
             micLevel.classList.add("active");
             setTimeout(() => micLevel.classList.remove("active"), 2000);
         });
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const startInterviewButton = document.getElementById("startInterviewButton");
     if (startInterviewButton) {
-        startInterviewButton.addEventListener("click", function() {
+        startInterviewButton.addEventListener("click", function () {
             window.location.href = "interview_main.html";
         });
     }
@@ -79,12 +79,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const interviewVideoPreview = document.getElementById("videoPreview");
     if (interviewVideoPreview && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-            .then(function(stream) {
+            .then(function (stream) {
                 interviewVideoPreview.srcObject = stream;
                 mediaStream = stream;
                 interviewVideoPreview.muted = true; // Mute to prevent feedback 
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 console.error("Error accessing media devices:", err);
             });
     }
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const nextQuestionBtn = document.getElementById("nextQuestionBtn");
     if (nextQuestionBtn) {
-        nextQuestionBtn.addEventListener("click", function() {
+        nextQuestionBtn.addEventListener("click", function () {
             currentQuestionIndex++;
             displayQuestion();
         });
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const endInterviewBtn = document.getElementById("endInterviewBtn");
     if (endInterviewBtn) {
-        endInterviewBtn.addEventListener("click", function() {
+        endInterviewBtn.addEventListener("click", function () {
             if (mediaStream) {
                 mediaStream.getTracks().forEach(track => track.stop());
             }
@@ -164,18 +164,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     experience: storedExperience
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.questions && Array.isArray(data.questions)) {
-                    questions = data.questions;
-                }
-                currentQuestionIndex = 0;
-                displayQuestion();
-            })
-            .catch(error => {
-                console.error("Error fetching questions:", error);
-                displayQuestion();
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.questions && Array.isArray(data.questions)) {
+                        questions = data.questions;
+                    }
+                    currentQuestionIndex = 0;
+                    displayQuestion();
+                })
+                .catch(error => {
+                    console.error("Error fetching questions:", error);
+                    displayQuestion();
+                });
         } else {
             displayQuestion();
         }
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Result page: Attach event for home button 
     const homeButton = document.getElementById("homeButton");
     if (homeButton) {
-        homeButton.addEventListener("click", function() {
+        homeButton.addEventListener("click", function () {
             window.location.href = "index.html";
         });
     }
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         testimonials[0].style.display = "block";
 
-        setInterval(function() {
+        setInterval(function () {
             testimonials[currentIndex].style.display = "none";
             currentIndex = (currentIndex + 1) % testimonials.length;
             testimonials[currentIndex].style.display = "block";

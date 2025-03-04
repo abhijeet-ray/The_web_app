@@ -1,20 +1,23 @@
 import random
 
+
 class InterviewQuestionProvider:
     def __init__(self):
-        # Define profiles and levels 
+        # Define profiles and levels
         self.profiles = ['DevOps', 'Software Engineer', 'Data Scientist']
-        self.levels = ['Entry', 'Mid', 'Senior']  # Changed 'Experienced' to 'Senior'
-        self.LEVEL_QUESTIONS = {'Entry': 10, 'Mid': 15, 'Senior': 20}  # Updated key
+        # Changed 'Experienced' to 'Senior'
+        self.levels = ['Entry', 'Mid', 'Senior']
+        self.LEVEL_QUESTIONS = {'Entry': 10,
+                                'Mid': 15, 'Senior': 20}  # Updated key
         self.NUM_SETS = 3
-        
-        # Initialize question sets for all profiles and levels 
+
+        # Initialize question sets for all profiles and levels
         self.question_sets = {}
         self._initialize_question_sets()
 
     def _initialize_question_sets(self):
         """Initialize question sets with real interview questions for each profile and level."""
-        # DevOps Questions 
+        # DevOps Questions
         devops_questions = {
             'Entry': {
                 1: [
@@ -177,7 +180,7 @@ class InterviewQuestionProvider:
             }
         }
 
-        # Software Engineer Questions 
+        # Software Engineer Questions
         software_engineer_questions = {
             'Entry': {
                 1: [
@@ -340,7 +343,7 @@ class InterviewQuestionProvider:
             }
         }
 
-        # Data Science Questions 
+        # Data Science Questions
         data_scientist_questions = {
             'Entry': {
                 1: [
@@ -503,16 +506,16 @@ class InterviewQuestionProvider:
             }
         }
 
-        # Populate question_sets with the defined questions 
+        # Populate question_sets with the defined questions
         for profile in self.profiles:
             self.question_sets[profile] = {}
             if profile == 'DevOps':
                 questions = devops_questions
             elif profile == 'Software Engineer':
                 questions = software_engineer_questions
-            else:  # Data Science 
+            else:  # Data Science
                 questions = data_scientist_questions
-            
+
             for level in self.levels:
                 self.question_sets[profile][level] = {
                     'sets': [questions[level][i] for i in range(1, self.NUM_SETS + 1)],
@@ -523,13 +526,14 @@ class InterviewQuestionProvider:
         """Return a shuffled set of questions for the given profile and level."""
         if profile not in self.profiles or level not in self.levels:
             return "Invalid profile or level"
-        
+
         level_data = self.question_sets[profile][level]
         current_set = level_data['sets'][level_data['current_index']]
-        
+
         questions = current_set.copy()
         random.shuffle(questions)
-        
-        level_data['current_index'] = (level_data['current_index'] + 1) % self.NUM_SETS
-        
+
+        level_data['current_index'] = (
+            level_data['current_index'] + 1) % self.NUM_SETS
+
         return questions

@@ -17,9 +17,11 @@ app.add_middleware(
 # Initialize the question provider
 provider = InterviewQuestionProvider()
 
+
 class InterviewRequest(BaseModel):
     profile: str
     experience: str  # Matches your frontend's "experience" parameter
+
 
 @app.post("/get-questions/")
 async def get_questions(request: InterviewRequest):
